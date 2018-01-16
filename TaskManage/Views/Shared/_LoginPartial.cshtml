@@ -1,0 +1,18 @@
+﻿@using TaskManage.Models
+
+@if (Session["User"] != null)
+{
+    User user = Session["User"] as User;
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Здравствуйте, " + user.Login, "", "")</li>
+        <li>@Html.ActionLink("Выход", "Exit", "Home")</li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Регистрация", "Register", "Home")</li>
+        <li>@Html.ActionLink("Выполнить вход", "Login", "Home")</li>
+    </ul>
+}

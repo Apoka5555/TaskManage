@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TaskManage.Models.Task>
+
+<br>
+
+<div>@ViewBag.Message</div>
+
+<br>
+
+<table class="table">
+
+    @{
+        if (Model.Any())
+        {
+            <tr>
+                <th>№</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Срок</th>
+                <th>Статус</th>
+                <th></th>
+            </tr>
+        }
+    }
+
+    @{ var i = 0; }
+    @foreach (var item in Model)
+    {
+        i++;
+
+        <tr>
+            <td>
+                @i
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+            <td>
+                @if (item.DueDate != null)
+                {
+                    @item.DueDate.Value.ToShortDateString()
+                }
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.Name)
+            </td>
+
+            <td>
+                @Html.ActionLink("Редактировать", "EditTask", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "DeleteTask", new { id = item.Id })
+            </td>
+        </tr>
+    }
+</table>
